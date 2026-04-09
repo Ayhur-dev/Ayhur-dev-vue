@@ -12,7 +12,7 @@
          On large screens it's 2 columns (text left, visual right).
          On mobile it stacks into a single column. -->
     <div
-      class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 pt-20 pb-16 grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)] md:grid-cols-2"
+      class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 pt-20 pb-16 grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]"
     >
       <!-- Left: Text content -->
       <div class="fade-up max-[765px]:text-center">
@@ -28,7 +28,7 @@
              viewport width, maximum 8rem. This makes it fluid and
              responsive without needing breakpoint classes. -->
         <h1
-          class="leading-none text-brand-dark tracking-[1.4rem] mb-3 lg:text-8xl md:text-6xl text-[5rem]"
+          class="leading-none text-brand-dark tracking-[1.4rem] mb-3 lg:text-8xl md:text-6xl text-[3rem]"
         >
           PURE<br />DURIAN<br />JOY
         </h1>

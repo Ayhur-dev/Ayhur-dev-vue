@@ -390,12 +390,19 @@ function handleSubmit(): void {
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 
-  // ── GSAP SCROLL ANIMATIONS ──
-  // Each element animates in as it enters the viewport.
-  // ScrollTrigger watches the scroll position and triggers
-  // the animation when the element hits the trigger point.
+  // Wait until everything (images/fonts) is loaded, then refresh ScrollTrigger
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+  });
 
-  // Heading slides up and fades in
+  // ── GSAP ANIMATIONS ──
+  // Set initial states
+  gsap.set([headingRef.value, infoRef.value, formRef.value, lineRef.value, footerRef.value], { opacity: 0, y: 20 });
+  gsap.set(infoRef.value?.querySelectorAll(".info-card") || [], { opacity: 0, x: -30 });
+gsap.set(formRef.value?.querySelectorAll(".form-field-wrapper") || [], { opacity: 0, y: 20 });
+  gsap.set(".social-btn", { opacity: 0, scale: 0.5 });
+
+  // Heading animation
   gsap.to(headingRef.value, {
     opacity: 1,
     y: 0,
@@ -404,14 +411,11 @@ onMounted(() => {
     scrollTrigger: {
       trigger: headingRef.value,
       start: "top 85%",
+      once: true, // trigger only once
     },
   });
 
-  // Set initial y position for heading
-  gsap.set(headingRef.value, { y: 60 });
-
-  // Info cards stagger in from the left
-  gsap.set(infoRef.value, { x: -40 });
+  // Info container animation
   gsap.to(infoRef.value, {
     opacity: 1,
     x: 0,
@@ -420,23 +424,25 @@ onMounted(() => {
     scrollTrigger: {
       trigger: infoRef.value,
       start: "top 80%",
+      once: true,
     },
   });
 
-  // Individual info cards stagger with delay
-  gsap.from(".info-card", {
-    opacity: 0,
-    x: -30,
-    stagger: 0.12,
-    duration: 0.6,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: infoRef.value,
-      start: "top 80%",
-    },
-  });
+  // Info cards stagger in
+gsap.to(infoRef.value?.querySelectorAll(".info-card") || [], {
+  opacity: 1,
+  x: 0,
+  duration: 0.6,
+  stagger: 0.12,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: infoRef.value,
+    start: "top 80%",
+  },
+});
 
-  // Animated yellow line grows from left to right
+
+  // Yellow line grows
   gsap.to(lineRef.value, {
     width: "100%",
     duration: 1.5,
@@ -444,11 +450,11 @@ onMounted(() => {
     scrollTrigger: {
       trigger: lineRef.value,
       start: "top 90%",
+      once: true,
     },
   });
 
-  // Form slides in from the right
-  gsap.set(formRef.value, { x: 40 });
+  // Form slides in
   gsap.to(formRef.value, {
     opacity: 1,
     x: 0,
@@ -457,24 +463,25 @@ onMounted(() => {
     scrollTrigger: {
       trigger: formRef.value,
       start: "top 80%",
+      once: true,
     },
   });
 
-  // Form fields stagger in one by one
-  gsap.from(".form-field-wrapper", {
-    opacity: 0,
-    y: 20,
-    stagger: 0.1,
-    duration: 0.5,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: formRef.value,
-      start: "top 75%",
-    },
-  });
+  // Form fields stagger
+  gsap.to(formRef.value?.querySelectorAll(".form-field-wrapper") || [], {
+  opacity: 1,
+  y: 0,
+  stagger: 0.1,
+  duration: 0.5,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: formRef.value,
+    start: "top 75%",
+    once: true,
+  },
+});
 
-  // Footer fades in
-  gsap.set(footerRef.value, { y: 20 });
+  // Footer fade in
   gsap.to(footerRef.value, {
     opacity: 1,
     y: 0,
@@ -483,27 +490,34 @@ onMounted(() => {
     scrollTrigger: {
       trigger: footerRef.value,
       start: "top 95%",
+      once: true,
     },
   });
 
-  // Social buttons stagger in
-  gsap.from(".social-btn", {
-    opacity: 0,
-    scale: 0.5,
+  // Social buttons stagger
+  gsap.to(".social-btn", {
+    opacity: 1,
+    scale: 1,
     stagger: 0.08,
     duration: 0.4,
     ease: "back.out(2)",
     scrollTrigger: {
       trigger: infoRef.value,
       start: "top 70%",
+      once: true,
     },
   });
 });
 
-onUnmounted(() => {
-  document.removeEventListener("click", handleClickOutside);
-  // Clean up all ScrollTrigger instances to prevent memory leaks
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+
+  // Refresh ScrollTrigger after images or fonts load
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+  });
+
+  // Your existing GSAP animations...
 });
 </script>
 

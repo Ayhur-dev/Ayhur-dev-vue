@@ -39,7 +39,7 @@
                   ? 'bg-brand-dark text-white'
                   : 'bg-white text-gray-400 hover:text-gray-600'
               "
-              class="px-6 py-3 lg:text-lg text-xs rounded-lg font-bold uppercase tracking-widest transition-all duration-200"
+              class="px-4 py-3 lg:text-lg text-xs rounded-sm font-bold uppercase tracking-widest transition-all duration-200"
             >
               {{ tab }}
             </button>
