@@ -252,7 +252,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -397,9 +397,24 @@ onMounted(() => {
 
   // ── GSAP ANIMATIONS ──
   // Set initial states
-  gsap.set([headingRef.value, infoRef.value, formRef.value, lineRef.value, footerRef.value], { opacity: 0, y: 20 });
-  gsap.set(infoRef.value?.querySelectorAll(".info-card") || [], { opacity: 0, x: -30 });
-gsap.set(formRef.value?.querySelectorAll(".form-field-wrapper") || [], { opacity: 0, y: 20 });
+  gsap.set(
+    [
+      headingRef.value,
+      infoRef.value,
+      formRef.value,
+      lineRef.value,
+      footerRef.value,
+    ],
+    { opacity: 0, y: 20 },
+  );
+  gsap.set(infoRef.value?.querySelectorAll(".info-card") || [], {
+    opacity: 0,
+    x: -30,
+  });
+  gsap.set(formRef.value?.querySelectorAll(".form-field-wrapper") || [], {
+    opacity: 0,
+    y: 20,
+  });
   gsap.set(".social-btn", { opacity: 0, scale: 0.5 });
 
   // Heading animation
@@ -429,18 +444,17 @@ gsap.set(formRef.value?.querySelectorAll(".form-field-wrapper") || [], { opacity
   });
 
   // Info cards stagger in
-gsap.to(infoRef.value?.querySelectorAll(".info-card") || [], {
-  opacity: 1,
-  x: 0,
-  duration: 0.6,
-  stagger: 0.12,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: infoRef.value,
-    start: "top 80%",
-  },
-});
-
+  gsap.to(infoRef.value?.querySelectorAll(".info-card") || [], {
+    opacity: 1,
+    x: 0,
+    duration: 0.6,
+    stagger: 0.12,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: infoRef.value,
+      start: "top 80%",
+    },
+  });
 
   // Yellow line grows
   gsap.to(lineRef.value, {
@@ -469,17 +483,17 @@ gsap.to(infoRef.value?.querySelectorAll(".info-card") || [], {
 
   // Form fields stagger
   gsap.to(formRef.value?.querySelectorAll(".form-field-wrapper") || [], {
-  opacity: 1,
-  y: 0,
-  stagger: 0.1,
-  duration: 0.5,
-  ease: "power2.out",
-  scrollTrigger: {
-    trigger: formRef.value,
-    start: "top 75%",
-    once: true,
-  },
-});
+    opacity: 1,
+    y: 0,
+    stagger: 0.1,
+    duration: 0.5,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: formRef.value,
+      start: "top 75%",
+      once: true,
+    },
+  });
 
   // Footer fade in
   gsap.to(footerRef.value, {
