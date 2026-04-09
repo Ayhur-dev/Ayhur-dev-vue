@@ -50,7 +50,7 @@
             <img
               :src="heroImage"
               alt="Hero"
-              class="relative z-10 w-full max-w-[clamp(680px,50vw,620px)] mx-auto"
+              class="relative z-10 w-full max-w-[clamp(280px,50vw,620px)] mx-auto"
             />
           </span>
 
