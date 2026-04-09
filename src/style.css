@@ -1,0 +1,28 @@
+/* src/assets/main.css */
+
+@import "tailwindcss";
+
+/* These are your "design tokens" — the core colours and fonts
+   that define your brand. By defining them once here, you can
+   use them as Tailwind classes everywhere: bg-brand-yellow, 
+   text-brand-dark, font-display etc. */
+
+@theme {
+  --color-brand-yellow: #f5c800;
+  --color-brand-dark: #1a1a1a;
+  --color-brand-gray: #f5f5f0;
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* Base styles that apply globally */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+}
